@@ -1,0 +1,7 @@
+pandas 
+numpy
+seaborn
+tensorflow
+sklearn
+
+-e .
