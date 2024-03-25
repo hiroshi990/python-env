@@ -1,7 +1,5 @@
-pandas 
+pandas
 numpy
 seaborn
 tensorflow
 scikit-learn
-
--e .
