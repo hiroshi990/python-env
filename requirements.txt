@@ -3,9 +3,7 @@ numpy
 seaborn
 tensorflow
 scikit-learn
-dill 
-sys
+catboost
+xgboost
 
-
-
-#-e .
+-e .
