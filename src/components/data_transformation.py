@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
-from src.data_ingestion import Dataingestion
+from src.components.data_ingestion import Dataingestion
 
 from sklearn.pipeline import Pipeline
 from src.exception import CustomException
@@ -32,10 +32,29 @@ class datatransformation:
             # print columns
             print('We have {} numerical features : {}'.format(len(numeric_features), numeric_features))
             print('\nWe have {} categorical features : {}'.format(len(categorical_features), categorical_features))
+            num_pipeline=Pipeline(steps=[
+                ("imputer",SimpleImputer(strategy="median")),
+                 ("scaler",StandardScaler())
+            ])
             
+            cat_pipreline=Pipeline(steps=[
+                ("imputer",SimpleImputer(strategy="most_frequent")),
+                ("onehot",OneHotEncoder()),
+                ("scaler",StandardScaler())
+            ])
+            preprocessor=ColumnTransformer([
+                ("num_pipeline",num_pipeline,numeric_features),
+                ("cat_pipelinr",cat_pipreline,categorical_features)
+                
+            ])
+            
+            return preprocessor
             
         except Exception as e :
             raise CustomException(e,sys)
+        
+        def inititate_data_transformation(self,train_path,test_path):
+            
         
             
 
