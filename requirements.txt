@@ -5,7 +5,8 @@ tensorflow
 scikit-learn
 catboost
 xgboost
-sys==3.11.4
+dill
+# sys==3.11.4
 
 
 -e .
