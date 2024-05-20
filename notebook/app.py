@@ -18,12 +18,12 @@ if __name__=="__main__":
 
         #data_transformation_config=DataTransformationConfig()
         data_transformation = datatransformation()
-        train_arr,test_arr,preprocessor_file_path = data_transformation.inititate_data_transformation(train_data_path , test_data_path)
+        new_train,new_test,preprocessor_file_path = data_transformation.inititate_data_transformation(train_data_path , test_data_path)
 
         ## Model Training
 
         model_trainer=Modeltrainer()
-        print(model_trainer.initiate_training(train_arr,test_arr))
+        print(model_trainer.initiate_training(new_train,new_test))
         
     except Exception as e:
         logging.info("Custom Exception")

@@ -23,6 +23,7 @@ from src.exception import CustomException
 from src.logger import logging
 from dataclasses import dataclass
 from src.utils import save_object
+from src.utils import evaluate_models
 
 @dataclass
 class Modeltrainingconfig:
@@ -39,9 +40,7 @@ class Modeltrainer(Modeltrainingconfig):
     
     def initiate_training(self,train_array,test_aaray):
         try:
-            
-            
-            self.X_train,self.y_train,self.X_test,self.y_test=(
+            X_train,y_train,X_test,y_test=(
                 train_array[:,:-1],
                 train_array[:,-1],
                 test_aaray[:,:-1],
@@ -49,7 +48,7 @@ class Modeltrainer(Modeltrainingconfig):
                 
             )
             
-            self.models = {
+            models = {
     "Linear Regression": LinearRegression(),
     "Lasso": Lasso(),
     "Ridge": Ridge(),
@@ -58,10 +57,11 @@ class Modeltrainer(Modeltrainingconfig):
     "Random Forest Regressor": RandomForestRegressor(),
     "XGBRegressor": XGBRegressor(), 
     "CatBoosting Regressor": CatBoostRegressor(verbose=False),
-    "AdaBoost Regressor": AdaBoostRegressor()}
+    "AdaBoost Regressor": AdaBoostRegressor()
+            }
             
             
-            self.params={
+            params = {
                 "Decision Tree": {
                     'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
                     'splitter':['best','random'],
@@ -98,65 +98,32 @@ class Modeltrainer(Modeltrainingconfig):
                 }
                 
             }
-            
-        except Exception as e:
-            raise CustomException(e,sys)
-            
-    def evaluate_models(self,X_train, y_train,X_test,y_test,models,params):
-        try:
-            report = {}
-            
-            for i in range(len(list(models))):
-                model = list(models.values())[i]
-                para=params[list(models.keys())[i]]
-
-                gs = GridSearchCV(model,para,cv=3)
-                gs.fit(X_train,y_train)
-
-                model.set_params(**gs.best_params_)
-                model.fit(X_train,y_train)
-
-                #model.fit(X_train, y_train)  # Train model
-
-                y_train_pred = model.predict(X_train)
-
-                y_test_pred = model.predict(X_test)
-
-                train_model_score = r2_score(y_train, y_train_pred)
-
-                test_model_score = r2_score(y_test, y_test_pred)
-
-                report[list(params.keys())[i]] = test_model_score
-
-            return report
         
-        
-        
-        except Exception as e:
-            raise CustomException(e,sys)
-        
-    def modeltraining(self,model_report,evaluate_models):
-        try:
-            self.model_report:dict=evaluate_models(self.X_train,self.y_train,self.X_test,self.y_test,self.models,self.params)
+    
+    
+            model_report:dict=evaluate_models(X_train,y_train,X_test,y_test,models,params)
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
-                list(model_report.values()).index(best_model_score)
-            ]
-            best_model = self.models[best_model_name]
+                list(model_report.values()).index(best_model_score)]
+            
+            best_model = models[best_model_name]
+            
+            print("This is the best model:")
+            print(best_model_name)
             
             
             if best_model_score<0.6:
                 raise CustomException("No best model found",sys)
-            logging.info(f"Best found model on both training and testing dataset")
+            logging.info("Best found model on both training and testing dataset")
             
             save_object(
                 file_path=super().trained_pkl_file,
                 obj=best_model
             )
             
-            predicted=best_model.predict(self.X_test)
+            predicted=best_model.predict(X_test)
             
-            r2_sqaure=r2_score(self.y_test,predicted)
+            r2_sqaure=r2_score(y_test,predicted)
             return(
                 r2_sqaure,
                 best_model,
