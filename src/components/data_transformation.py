@@ -45,7 +45,7 @@ class datatransformation(datatransfromationconfig):
            cat_pipeline=Pipeline(steps=[
                 ("imputer",SimpleImputer(strategy="most_frequent")),
                 ("onehot",OneHotEncoder()),
-                ("scaler",StandardScaler())
+                ("scaler",StandardScaler(with_mean=False))
             ])
            preprocessor=ColumnTransformer([
                 ("num_pipeline",num_pipeline,numeric_features),
@@ -76,8 +76,8 @@ class datatransformation(datatransfromationconfig):
             Y_test=test_df[target_column]
             
             logging.info("applying the preprocessor")
-            trained_xdata=preprocessor_obj.fit_transform(X_train)
-            test_xdata=preprocessor_obj.transform(X_test)
+            trained_xdata= preprocessor_obj.fit_transform(X_train)
+            test_xdata= preprocessor_obj.transform(X_test)
             
             '''
             now since the train and test data has been transformed we hace the new dataset on which we will
@@ -86,7 +86,7 @@ class datatransformation(datatransfromationconfig):
             '''
             new_train=np.c_[trained_xdata,np.array(Y_train)]
             new_test=np.c_[test_xdata,np.array(Y_test)]
-            logging.info(f"Saved preprocessing object")
+            logging.info("Saved preprocessing object")
             
             save_object(
 
