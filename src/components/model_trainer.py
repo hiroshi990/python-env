@@ -22,12 +22,21 @@ import warnings
 from src.exception import CustomException
 from src.logger import logging
 from dataclasses import dataclass
+from src.utils import save_object
 
 @dataclass
 class Modeltrainingconfig:
     trained_pkl_file=os.path.join("artifacts","model.pkl")
 @dataclass    
 class Modeltrainer(Modeltrainingconfig):
+    
+    def eval_metrics(self,actual, pred):
+        rmse = np.sqrt(mean_squared_error(actual, pred))
+        mae = mean_absolute_error(actual, pred)
+        r2 = r2_score(actual, pred)
+        return rmse, mae, r2
+    
+    
     def initiate_training(self,train_array,test_aaray):
         try:
             
@@ -134,6 +143,25 @@ class Modeltrainer(Modeltrainingconfig):
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = self.models[best_model_name]
+            
+            
+            if best_model_score<0.6:
+                raise CustomException("No best model found",sys)
+            logging.info(f"Best found model on both training and testing dataset")
+            
+            save_object(
+                file_path=super().trained_pkl_file,
+                obj=best_model
+            )
+            
+            predicted=best_model.predict(self.X_test)
+            
+            r2_sqaure=r2_score(self.y_test,predicted)
+            return(
+                r2_sqaure,
+                best_model,
+                best_model_name,
+                best_model_score)
             
         except Exception as e:
             raise CustomException(e,sys)
