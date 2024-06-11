@@ -12,10 +12,10 @@ def get_requirements(file_path:str)->List[str]:
 
         if dot in requirements:
             requirements.remove(dot)
-    return requirements        
+            return requirements        
 
 
- 
+
 
 
 setup(

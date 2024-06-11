@@ -1,0 +1,11 @@
+[ 2024-06-11 13:15:22,804 ] 12 root - INFO - The execution has started
+[ 2024-06-11 13:15:22,804 ] 20 root - INFO - Entered the data ingestion method
+[ 2024-06-11 13:15:22,804 ] 23 root - INFO - read the dataset
+[ 2024-06-11 13:15:22,804 ] 27 root - INFO - train_test_split initiated
+[ 2024-06-11 13:15:22,804 ] 31 root - INFO - ingestion of the data is completed
+[ 2024-06-11 13:15:22,819 ] 67 root - INFO - Reading the train and test file
+[ 2024-06-11 13:15:22,819 ] 70 root - INFO - dividing the train dataset as xtrain and ytrain
+[ 2024-06-11 13:15:22,819 ] 75 root - INFO - Dividing the test dataset
+[ 2024-06-11 13:15:22,835 ] 79 root - INFO - applying the preprocessor
+[ 2024-06-11 13:15:22,836 ] 90 root - INFO - Saved preprocessing object
+[ 2024-06-11 13:16:15,272 ] 122 root - INFO - Best found model on both training and testing dataset

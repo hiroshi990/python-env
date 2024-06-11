@@ -22,14 +22,14 @@ def save_object(file_path, obj):
         raise CustomException(e, sys)
 
     
-def evaluate_models(self,X_train, y_train,X_test,y_test,models,params):
+def evaluate_models(X_train,y_train,X_test,y_test,models,parameter):
     
     try:
             report = {}
             
             for i in range(len(list(models))):
-                model = list(model.values())[i]
-                para=params[list(model.keys())[i]]
+                model = list(models.values())[i]
+                para=parameter[list(models.keys())[i]]
 
                 gs = GridSearchCV(model,para,cv=3)
                 gs.fit(X_train,y_train)
@@ -47,7 +47,7 @@ def evaluate_models(self,X_train, y_train,X_test,y_test,models,params):
 
                 test_model_score = r2_score(y_test, y_test_pred)
 
-                report[list(params.keys())[i]] = test_model_score
+                report[list(parameter.keys())[i]] = test_model_score
 
             return report
     except Exception as e:

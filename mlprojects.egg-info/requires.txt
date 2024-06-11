@@ -6,3 +6,6 @@ scikit-learn
 catboost
 xgboost
 dill
+flask
+streamlit
+mlflow

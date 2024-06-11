@@ -15,15 +15,20 @@ if __name__=="__main__":
         #data_ingestion_config=DataIngestionConfig()
         data_ingestion=Dataingestion()
         raw_data_path,train_data_path,test_data_path=data_ingestion.initiate_data_ingestion()
+        logging.info(f"Data Ingestion completed: raw_data_path={raw_data_path}, train_data_path={train_data_path}, test_data_path={test_data_path}")
 
         #data_transformation_config=DataTransformationConfig()
         data_transformation = datatransformation()
-        new_train,new_test,preprocessor_file_path = data_transformation.inititate_data_transformation(train_data_path , test_data_path)
+        new_test,new_train,_ = data_transformation.inititate_data_transformation(train_data_path , test_data_path)
+        logging.info("Data Transformation completed")
 
         ## Model Training
 
         model_trainer=Modeltrainer()
-        print(model_trainer.initiate_training(new_train,new_test))
+        print(model_trainer.initiate_training(new_train, new_test))
+        logging.info(f"Model Training completed with R² score")
+        
+        
         
     except Exception as e:
         logging.info("Custom Exception")

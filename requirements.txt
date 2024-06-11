@@ -6,6 +6,9 @@ scikit-learn
 catboost
 xgboost
 dill
+flask
+streamlit
+mlflow
 # sys==3.11.4
 
 

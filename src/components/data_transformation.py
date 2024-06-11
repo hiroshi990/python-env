@@ -29,31 +29,32 @@ class datatransformation(datatransfromationconfig):
         for data trnasformation
         '''
         try:
-           numeric_features = ["writing_score", "reading_score"]
-           categorical_features = [
+            
+            numeric_features = ["writing_score", "reading_score"]
+            categorical_features = [
                 "gender",
                 "race_ethnicity",
                 "parental_level_of_education",
                 "lunch",
-                "test_preparation_course",
+                "test_preparation_course"
             ]
-           num_pipeline=Pipeline(steps=[
+            num_pipeline=Pipeline(steps=[
                 ("imputer",SimpleImputer(strategy="median")),
-                 ("scaler",StandardScaler())
+                ("scaler",StandardScaler())
             ])
            
-           cat_pipeline=Pipeline(steps=[
+            cat_pipeline=Pipeline(steps=[
                 ("imputer",SimpleImputer(strategy="most_frequent")),
                 ("onehot",OneHotEncoder()),
                 ("scaler",StandardScaler(with_mean=False))
             ])
-           preprocessor=ColumnTransformer([
+            preprocessor=ColumnTransformer([
                 ("num_pipeline",num_pipeline,numeric_features),
                 ("cat_pipelinr",cat_pipeline,categorical_features)
                 
             ])
            
-           return preprocessor
+            return preprocessor
             
         except Exception as e :
             raise CustomException(e,sys)
