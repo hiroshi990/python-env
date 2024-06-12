@@ -50,10 +50,10 @@ class datatransformation(datatransfromationconfig):
             ])
             preprocessor=ColumnTransformer([
                 ("num_pipeline",num_pipeline,numeric_features),
-                ("cat_pipelinr",cat_pipeline,categorical_features)
+                ("cat_pipeline",cat_pipeline,categorical_features)
                 
             ])
-           
+        
             return preprocessor
             
         except Exception as e :

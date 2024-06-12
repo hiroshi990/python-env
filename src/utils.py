@@ -4,8 +4,10 @@ import sys
 import numpy as np 
 import pandas as pd
 import pickle
+import dill
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
+from sklearn.compose import ColumnTransformer
 
 from src.exception import CustomException
 
@@ -56,7 +58,8 @@ def evaluate_models(X_train,y_train,X_test,y_test,models,parameter):
 def load_object(file_path):
     try:
         with open(file_path, "rb") as file_obj:
-            return pickle.load(file_obj)
+            file=dill.load(file_obj)
+            return file
 
     except Exception as e:
         raise CustomException(e, sys)

@@ -1,0 +1,12 @@
+[ 2024-06-12 21:37:01,168 ] 12 root - INFO - The execution has started
+[ 2024-06-12 21:37:01,168 ] 20 root - INFO - Entered the data ingestion method
+[ 2024-06-12 21:37:01,183 ] 23 root - INFO - read the dataset
+[ 2024-06-12 21:37:01,183 ] 27 root - INFO - train_test_split initiated
+[ 2024-06-12 21:37:01,199 ] 31 root - INFO - ingestion of the data is completed
+[ 2024-06-12 21:37:01,199 ] 18 root - INFO - Data Ingestion completed: raw_data_path=artifacts\data.csv, train_data_path=artifacts\train.csv, test_data_path=artifacts\test.csv
+[ 2024-06-12 21:37:01,216 ] 67 root - INFO - Reading the train and test file
+[ 2024-06-12 21:37:01,216 ] 70 root - INFO - dividing the train dataset as xtrain and ytrain
+[ 2024-06-12 21:37:01,216 ] 75 root - INFO - Dividing the test dataset
+[ 2024-06-12 21:37:01,216 ] 79 root - INFO - applying the preprocessor
+[ 2024-06-12 21:37:01,231 ] 90 root - INFO - Saved preprocessing object
+[ 2024-06-12 21:37:01,231 ] 23 root - INFO - Data Transformation completed

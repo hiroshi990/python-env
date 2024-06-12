@@ -1,0 +1,14 @@
+[ 2024-06-12 21:37:29,912 ] 12 root - INFO - The execution has started
+[ 2024-06-12 21:37:29,912 ] 20 root - INFO - Entered the data ingestion method
+[ 2024-06-12 21:37:29,925 ] 23 root - INFO - read the dataset
+[ 2024-06-12 21:37:29,925 ] 27 root - INFO - train_test_split initiated
+[ 2024-06-12 21:37:29,925 ] 31 root - INFO - ingestion of the data is completed
+[ 2024-06-12 21:37:29,940 ] 18 root - INFO - Data Ingestion completed: raw_data_path=artifacts\data.csv, train_data_path=artifacts\train.csv, test_data_path=artifacts\test.csv
+[ 2024-06-12 21:37:29,957 ] 67 root - INFO - Reading the train and test file
+[ 2024-06-12 21:37:29,957 ] 70 root - INFO - dividing the train dataset as xtrain and ytrain
+[ 2024-06-12 21:37:29,957 ] 75 root - INFO - Dividing the test dataset
+[ 2024-06-12 21:37:29,957 ] 79 root - INFO - applying the preprocessor
+[ 2024-06-12 21:37:29,973 ] 90 root - INFO - Saved preprocessing object
+[ 2024-06-12 21:37:29,973 ] 23 root - INFO - Data Transformation completed
+[ 2024-06-12 21:38:28,960 ] 122 root - INFO - Best found model on both training and testing dataset
+[ 2024-06-12 21:38:28,975 ] 29 root - INFO - Model Training completed with R² score
