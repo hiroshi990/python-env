@@ -6,8 +6,8 @@ from src.utils import load_object
 
 
 
-model_pipeline=load_object("E:/python env/artifacts/model.pkl")
-transformer=load_object("E:/python env/artifacts/preprocessor.pkl")
+model_pipeline=load_object("/python env/artifacts/model.pkl")
+transformer=load_object("/python env/artifacts/preprocessor.pkl")
 
 
 def predict_page():
