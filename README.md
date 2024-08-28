@@ -1,5 +1,3 @@
-first end to end project
+end to end project
 machine learning
 DATA science
-initial commit
-pull example
